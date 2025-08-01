@@ -2,6 +2,8 @@
 
 **The collection of [BetterAnimations](https://github.com/arg0NNY/BetterAnimations) packs made by [arg0NNY](https://github.com/arg0NNY).**
 
+![BetterAnimations](https://github.com/user-attachments/assets/b62638b3-486b-4841-8567-7eaa05774d3e)
+
 ```
  
 ```

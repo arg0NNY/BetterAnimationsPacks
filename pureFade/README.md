@@ -1,3 +1,4 @@
+![Pure Fade](https://github.com/user-attachments/assets/7671d360-740c-4b3a-8e9b-01de0deb2fc5)
 
 # [Pure Fade](https://github.com/arg0NNY/BetterAnimationsPacks/tree/main/pureFade) ![Status][status-official-badge] ![Version][purefade-version-badge]
 A collection of transparency switch animations from BetterAnimations with a true fade transition — eliminating the slight flicker of the background at the cost of lacking support for transparent Discord themes.

@@ -1,3 +1,4 @@
+![Ol' Days](https://github.com/user-attachments/assets/f8f2e005-12ec-448b-8c73-33a7945c2760)
 
 # [Ol' Days](https://github.com/arg0NNY/BetterAnimationsPacks/tree/main/olDays) ![Status][status-official-badge] ![Version][oldays-version-badge]
 An accurate port of all the animations from BetterAnimations V1, reproducing all their beauty, and all their flaws too.
