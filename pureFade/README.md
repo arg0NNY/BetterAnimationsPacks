@@ -8,4 +8,4 @@ A collection of transparency switch animations from BetterAnimations with a true
 
 [status-official-badge]: https://img.shields.io/badge/status-official-brightgreen
 
-[purefade-version-badge]: https://img.shields.io/badge/version-1.0.0-blue
+[purefade-version-badge]: https://img.shields.io/badge/version-1.1.0-blue

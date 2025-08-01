@@ -1,10 +1,10 @@
 {
   "name": "Pure Fade",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "arg0NNY",
   "description": "A collection of transparency switch animations from BetterAnimations with a true fade transition — eliminating the slight flicker of the background at the cost of lacking support for transparent Discord themes.",
   "invite": "M8DBtcZjXD",
-  "authorLink": "https://github.com/arg0NNY",
+  "authorLink": "https://github.com/arg0NNY/BetterAnimationsPacks",
   "donate": "https://boosty.to/arg0nny/donate",
 
   "snippets": [
@@ -23,20 +23,23 @@
         "negativeValue": -5
       },
       "value": {
-        "inject": "type",
-        "enter": {
-          "inject": "direction",
-          "upwards": { "y": [{ "inject": "snippet.params", "name": "value" }, 0] },
-          "downwards": { "y": [{ "inject": "snippet.params", "name": "negativeValue" }, 0] },
-          "leftwards": { "x": [{ "inject": "snippet.params", "name": "value" }, 0] },
-          "rightwards": { "x": [{ "inject": "snippet.params", "name": "negativeValue" }, 0] }
-        },
-        "exit": {
-          "inject": "direction",
-          "upwards": { "y": { "inject": "snippet.params", "name": "negativeValue" } },
-          "downwards": { "y": { "inject": "snippet.params", "name": "value" } },
-          "leftwards": { "x": { "inject": "snippet.params", "name": "negativeValue" } },
-          "rightwards": { "x": { "inject": "snippet.params", "name": "value" } }
+        "inject": "vector",
+        "values": {
+          "inject": "type",
+          "enter": {
+            "inject": "direction",
+            "upwards": { "y": [{ "inject": "snippet.params", "name": "value" }, 0] },
+            "downwards": { "y": [{ "inject": "snippet.params", "name": "negativeValue" }, 0] },
+            "leftwards": { "x": [{ "inject": "snippet.params", "name": "value" }, 0] },
+            "rightwards": { "x": [{ "inject": "snippet.params", "name": "negativeValue" }, 0] }
+          },
+          "exit": {
+            "inject": "direction",
+            "upwards": { "y": { "inject": "snippet.params", "name": "negativeValue" } },
+            "downwards": { "y": { "inject": "snippet.params", "name": "value" } },
+            "leftwards": { "x": { "inject": "snippet.params", "name": "negativeValue" } },
+            "rightwards": { "x": { "inject": "snippet.params", "name": "value" } }
+          }
         }
       }
     },
@@ -120,16 +123,13 @@
           "type": "waapi",
           "targets": { "inject": "element" },
           "parameters": {
-            "inject": "assign",
-            "target": {
-              "duration": { "inject": "duration" },
-              "ease": { "inject": "easing" },
-              "opacity": {
-                "inject": "snippet",
-                "key": "opacity"
-              }
+            "duration": { "inject": "duration" },
+            "ease": { "inject": "easing" },
+            "opacity": {
+              "inject": "snippet",
+              "key": "opacity"
             },
-            "source": {
+            "translate": {
               "inject": "snippet",
               "key": "directionalTranslate",
               "params": {

@@ -1,10 +1,10 @@
 {
   "name": "Ol' Days",
   "author": "arg0NNY",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "An accurate port of all the animations from BetterAnimations V1, reproducing all their beauty, and all their flaws too.",
   "invite": "M8DBtcZjXD",
-  "authorLink": "https://github.com/arg0NNY",
+  "authorLink": "https://github.com/arg0NNY/BetterAnimationsPacks",
   "donate": "https://boosty.to/arg0nny/donate",
 
   "snippets": [
@@ -23,20 +23,23 @@
         "negativeValue": -10
       },
       "value": {
-        "inject": "type",
-        "enter": {
-          "inject": "direction",
-          "upwards": { "y": [{ "inject": "snippet.params", "name": "value" }, 0] },
-          "downwards": { "y": [{ "inject": "snippet.params", "name": "negativeValue" }, 0] },
-          "leftwards": { "x": [{ "inject": "snippet.params", "name": "value" }, 0] },
-          "rightwards": { "x": [{ "inject": "snippet.params", "name": "negativeValue" }, 0] }
-        },
-        "exit": {
-          "inject": "direction",
-          "upwards": { "y": [0, { "inject": "snippet.params", "name": "negativeValue" }] },
-          "downwards": { "y": [0, { "inject": "snippet.params", "name": "value" }] },
-          "leftwards": { "x": [0, { "inject": "snippet.params", "name": "negativeValue" }] },
-          "rightwards": { "x": [0, { "inject": "snippet.params", "name": "value" }] }
+        "inject": "vector",
+        "values": {
+          "inject": "type",
+          "enter": {
+            "inject": "direction",
+            "upwards": { "y": [{ "inject": "snippet.params", "name": "value" }, 0] },
+            "downwards": { "y": [{ "inject": "snippet.params", "name": "negativeValue" }, 0] },
+            "leftwards": { "x": [{ "inject": "snippet.params", "name": "value" }, 0] },
+            "rightwards": { "x": [{ "inject": "snippet.params", "name": "negativeValue" }, 0] }
+          },
+          "exit": {
+            "inject": "direction",
+            "upwards": { "y": [0, { "inject": "snippet.params", "name": "negativeValue" }] },
+            "downwards": { "y": [0, { "inject": "snippet.params", "name": "value" }] },
+            "leftwards": { "x": [0, { "inject": "snippet.params", "name": "negativeValue" }] },
+            "rightwards": { "x": [0, { "inject": "snippet.params", "name": "value" }] }
+          }
         }
       }
     }
@@ -74,16 +77,13 @@
           "type": "waapi",
           "targets": { "inject": "element" },
           "parameters": {
-            "inject": "assign",
-            "target": {
-              "duration": { "inject": "duration" },
-              "ease": { "inject": "easing" },
-              "opacity": {
-                "inject": "snippet",
-                "key": "opacity"
-              }
+            "duration": { "inject": "duration" },
+            "ease": { "inject": "easing" },
+            "opacity": {
+              "inject": "snippet",
+              "key": "opacity"
             },
-            "source": {
+            "translate": {
               "inject": "snippet",
               "key": "directionalTranslate",
               "params": {
@@ -126,16 +126,13 @@
           "type": "waapi",
           "targets": { "inject": "element" },
           "parameters": {
-            "inject": "assign",
-            "target": {
-              "duration": { "inject": "duration" },
-              "ease": { "inject": "easing" },
-              "opacity": {
-                "inject": "snippet",
-                "key": "opacity"
-              }
+            "duration": { "inject": "duration" },
+            "ease": { "inject": "easing" },
+            "opacity": {
+              "inject": "snippet",
+              "key": "opacity"
             },
-            "source": {
+            "translate": {
               "inject": "snippet",
               "key": "directionalTranslate",
               "params": {
@@ -183,26 +180,33 @@
           "type": "waapi",
           "targets": { "inject": "element" },
           "parameters": {
-            "inject": "assign",
-            "target": {
-              "duration": { "inject": "duration" },
-              "ease": { "inject": "easing" }
-            },
-            "source": {
-              "inject": "type",
-              "enter": {
+            "duration": { "inject": "duration" },
+            "ease": { "inject": "easing" },
+            "rotate": {
+              "inject": "rotate",
+              "axis": {
                 "inject": "direction",
-                "forwards": { "rotateX": [-90, -90, 0] },
-                "backwards": { "rotateX": [90, 90, 0] },
-                "leftwards": { "rotateY": [90, 90, 0] },
-                "rightwards": { "rotateY": [-90, -90, 0] }
+                "forwards": "x",
+                "backwards": "x",
+                "leftwards": "y",
+                "rightwards": "y"
               },
-              "exit": {
-                "inject": "direction",
-                "forwards": { "rotateX": [0, 90, 90] },
-                "backwards": { "rotateX": [0, -90, -90] },
-                "leftwards": { "rotateY": [0, -90, -90] },
-                "rightwards": { "rotateY": [0, 90, 90] }
+              "angle": {
+                "inject": "type",
+                "enter": {
+                  "inject": "direction",
+                  "forwards": [-90, -90, 0],
+                  "backwards": [90, 90, 0],
+                  "leftwards": [90, 90, 0],
+                  "rightwards": [-90, -90, 0]
+                },
+                "exit": {
+                  "inject": "direction",
+                  "forwards": [0, 90, 90],
+                  "backwards": [0, -90, -90],
+                  "leftwards": [0, -90, -90],
+                  "rightwards": [0, 90, 90]
+                }
               }
             }
           }
@@ -268,19 +272,31 @@
               "enter": {
                 "inject": "direction",
                 "upwards": {
-                  "y": ["100%", 0],
+                  "translate": {
+                    "inject": "vector",
+                    "values": { "y": ["100%", 0] }
+                  },
                   "opacity": [0, 1]
                 },
                 "downwards": {
-                  "y": ["-100%", 0],
+                  "translate": {
+                    "inject": "vector",
+                    "values": { "y": ["-100%", 0] }
+                  },
                   "opacity": [0, 1]
                 },
                 "leftwards": {
-                  "x": ["100%", 0],
+                  "translate": {
+                    "inject": "vector",
+                    "values": { "x": ["100%", 0] }
+                  },
                   "opacity": [0, 1]
                 },
                 "rightwards": {
-                  "x": ["-100%", 0],
+                  "translate": {
+                    "inject": "vector",
+                    "values": { "x": ["-100%", 0] }
+                  },
                   "opacity": [0, 1]
                 },
                 "forwards": {
@@ -503,23 +519,23 @@
           "type": "waapi",
           "targets": { "inject": "element" },
           "parameters": {
-            "inject": "assign",
-            "target": {
-              "duration": { "inject": "duration" },
-              "ease": { "inject": "easing" },
-              "reversed": {
-                "inject": "type",
-                "enter": false,
-                "exit": true
-              },
-              "opacity": [0, 1]
+            "duration": { "inject": "duration" },
+            "ease": { "inject": "easing" },
+            "reversed": {
+              "inject": "type",
+              "enter": false,
+              "exit": true
             },
-            "source": {
-              "inject": "position",
-              "top": { "y": [10, 0] },
-              "bottom": { "y": [-10, 0] },
-              "left": { "x": [10, 0] },
-              "right": { "x": [-10, 0] }
+            "opacity": [0, 1],
+            "translate": {
+              "inject": "vector",
+              "values": {
+                "inject": "position",
+                "top": { "y": [10, 0] },
+                "bottom": { "y": [-10, 0] },
+                "left": { "x": [10, 0] },
+                "right": { "x": [-10, 0] }
+              }
             }
           }
         }
@@ -565,24 +581,24 @@
           "type": "waapi",
           "targets": { "inject": "element" },
           "parameters": {
-            "inject": "assign",
-            "target": {
-              "duration": { "inject": "duration" },
-              "ease": { "inject": "easing" },
-              "reversed": {
-                "inject": "type",
-                "enter": false,
-                "exit": true
-              },
-              "opacity": [0, 1],
-              "scale": [0.9, 1]
+            "duration": { "inject": "duration" },
+            "ease": { "inject": "easing" },
+            "reversed": {
+              "inject": "type",
+              "enter": false,
+              "exit": true
             },
-            "source": {
-              "inject": "position",
-              "top": { "y": [-10, 0] },
-              "bottom": { "y": [10, 0] },
-              "left": { "x": [-10, 0] },
-              "right": { "x": [10, 0] }
+            "opacity": [0, 1],
+            "scale": [0.9, 1],
+            "translate": {
+              "inject": "vector",
+              "values": {
+                "inject": "position",
+                "top": { "y": [-10, 0] },
+                "bottom": { "y": [10, 0] },
+                "left": { "x": [-10, 0] },
+                "right": { "x": [10, 0] }
+              }
             }
           }
         }
@@ -633,23 +649,30 @@
           "type": "waapi",
           "targets": { "inject": "element" },
           "parameters": {
-            "inject": "assign",
-            "target": {
-              "duration": { "inject": "duration" },
-              "ease": { "inject": "easing" },
-              "reversed": {
-                "inject": "type",
-                "enter": false,
-                "exit": true
-              },
-              "opacity": [0, 1]
+            "duration": { "inject": "duration" },
+            "ease": { "inject": "easing" },
+            "reversed": {
+              "inject": "type",
+              "enter": false,
+              "exit": true
             },
-            "source": {
-              "inject": "position",
-              "top": { "rotateX": [-90, 0] },
-              "bottom": { "rotateX": [90, 0] },
-              "left": { "rotateY": [-90, 0] },
-              "right": { "rotateY": [90, 0] }
+            "opacity": [0, 1],
+            "rotate": {
+              "inject": "rotate",
+              "axis": {
+                "inject": "position",
+                "top": "x",
+                "bottom": "x",
+                "left": "y",
+                "right": "y"
+              },
+              "angle": {
+                "inject": "position",
+                "top": [-90, 0],
+                "bottom": [90, 0],
+                "left": [-90, 0],
+                "right": [90, 0]
+              }
             }
           }
         }
